@@ -1,13 +1,20 @@
 package operadores;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import operadores.classes.Aluno;
+import operadores.classes.Disciplina;
 
 public class logicaoperadores {
 	
 	public static void main(String[] args) {
 		
+		List<Aluno> alunos = new ArrayList<Aluno>();
+		
+		for ( int qtd = 0; qtd <=1; qtd++) {
 		/*Objeto ainda não existe na memoria*/
 		/*Aluno aluno1;*/
 	
@@ -15,7 +22,7 @@ public class logicaoperadores {
 		/*New Aluno é uma instancia (criação de objeto)*/
 		/*aluno1 e uma referencia para o objeto*/
 		
-		String nome = JOptionPane.showInputDialog("Qual o nome do aluno?");
+		String nome = JOptionPane.showInputDialog("Qual o nome do aluno "+qtd+"?");
 		String idade = JOptionPane.showInputDialog("Qual a idade do aluno?");
 		String dataNascimento = JOptionPane.showInputDialog("QUal a data de Nascimento do aluno");
 		String rg = JOptionPane.showInputDialog("Qual o RG do aluno?");
@@ -26,17 +33,7 @@ public class logicaoperadores {
 		String escola = JOptionPane.showInputDialog("Qual nome da escola?");
 		String serie = JOptionPane.showInputDialog("Qual a serie?");
 		
-		String disciplina1 = JOptionPane.showInputDialog("Disciplina 1?");
-		String nota1 = JOptionPane.showInputDialog("Qual a primeira nota?");
 		
-		String disciplina2 = JOptionPane.showInputDialog("Disciplina 2?");
-		String nota2 = JOptionPane.showInputDialog("Qual a segunda nota?");
-		
-		String disciplina3 = JOptionPane.showInputDialog("Disciplina 3?");
-		String nota3 = JOptionPane.showInputDialog("Qual a terceira nota?");
-		
-		String disciplina4 = JOptionPane.showInputDialog("Disciplina 4?");
-		String nota4 = JOptionPane.showInputDialog("Qual a quarta nota?");
 		
 		Aluno aluno1 = new Aluno();
 		
@@ -51,18 +48,31 @@ public class logicaoperadores {
 		aluno1.setNomeEscola(escola);
 		aluno1.setSerieMatriculado(serie);
 		
-		aluno1.getDisciplina().setDisciplina1(disciplina1);
-		aluno1.getDisciplina().setNota1(Double.parseDouble(nota1));
+		for(int pos =1; pos <= 4; pos++) {
+			String nomeDisciplina = JOptionPane.showInputDialog("Nome da Disciplina "+pos+"?");
+			String notaDisciplina = JOptionPane.showInputDialog("Nota da Disciplina "+pos+"?");
+			
+			Disciplina disciplina = new Disciplina();
+			disciplina.setDisciplina(nomeDisciplina);
+			disciplina.setNota(Double.valueOf(notaDisciplina));
+			
+			aluno1.getDisciplinas().add(disciplina);
+		}
 		
-		aluno1.getDisciplina().setDisciplina2(disciplina2);
-		aluno1.getDisciplina().setNota2(Double.parseDouble(nota2));
-		
-		aluno1.getDisciplina().setDisciplina3(disciplina3);
-		aluno1.getDisciplina().setNota3(Double.parseDouble(nota3));
-		
-		aluno1.getDisciplina().setDisciplina4(disciplina4);
-		aluno1.getDisciplina().setNota4(Double.parseDouble(nota4));
-		
+		int escolha = JOptionPane.showConfirmDialog(null, "Deseja Remover Alguma Disciplina?");
+		if( escolha == 0) {
+			
+			int continuarRemover = 0;
+			int posicao = 1;
+			
+			while(continuarRemover == 0){
+				String disciplinaRemover = JOptionPane.showInputDialog("Qual a disciplina 1, 2, 3 ou 4 ?");
+				aluno1.getDisciplinas().remove(Integer.valueOf(disciplinaRemover).intValue() - posicao);
+				posicao ++; 
+				continuarRemover = JOptionPane.showConfirmDialog(null, "Continuar a Remover");
+			}
+		}
+	
 		
 		System.out.println("Nome é = " +aluno1.getNome());
 		System.out.println("Idade é = " +aluno1.getIdade());
@@ -77,33 +87,17 @@ public class logicaoperadores {
 		System.out.println("Média da nota é: " + aluno1.getMediaNota());
 		System.out.println("Resultado= " +(aluno1.getAlunoAprovado() ? "Aprovado" : "Reprovado"));
 		System.out.println("Resultado= " +aluno1.getAlunoAprovado2());
+	
 		
-		System.out.println(aluno1.toString());/*Descrição do objeto na memoria */
-		System.out.println("Média do aluno: " +aluno1.getMediaNota());
-		System.out.println("Resultado: " + aluno1.getAlunoAprovado2());
+		alunos.add(aluno1);
+		}
 		
-		
-		
-		
-		
-		
-		
-		/*Equals e Hascode (Diferenciar e comparar Objetos)*/
-		
-		/*Aluno aluno1 = new Aluno();
-		aluno1.setNome("Natiele");
-		aluno1.setNumeroCpf("115.764.786-37");
-		+
-		Aluno aluno2 = new Aluno();
-		aluno2.setNome("Natiele");
-		aluno2.setNumeroCpf("142.582.536-03");
-		
-		if (aluno1.equals(aluno2)) {/*Criado o equals na class aluno para realizar a comparação*/
-			/*System.out.println("Alunos são Iguais");
-		}else {
-			System.out.println("Alunos não são Iguais");
-		}*/
-		
+		for(Aluno aluno : alunos) {
+			System.out.println(aluno.toString());/*Descrição do objeto na memoria */
+			System.out.println("Média do aluno: " +aluno.getMediaNota());
+			System.out.println("Resultado: " + aluno.getAlunoAprovado2());
+			System.out.println("------------------------------------------------------------");
+		}
 		
 	}
 

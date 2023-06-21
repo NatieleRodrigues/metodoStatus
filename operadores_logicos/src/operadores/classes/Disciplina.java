@@ -1,12 +1,10 @@
 package operadores.classes;
 
-import java.util.Objects;
-
+/*esta classe disciplina servirá para todos os objetos e instacias de notas e materias*/
 public class Disciplina {
 	
 	private String disciplina;
 	private double nota;
-	
 	
 	public String getDisciplina() {
 		return disciplina;
@@ -40,8 +38,6 @@ public class Disciplina {
 	public String toString() {
 		return "Disciplina [disciplina=" + disciplina + ", nota=" + nota + "]";
 	}
-	
-	
 	
 
 }

@@ -1,5 +1,7 @@
 package operadores.classes;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /*está é nossa classe/objeto que representa o aluno*/
@@ -16,14 +18,17 @@ public class Aluno {
 	private String nomeEscola;
 	private String serieMatriculado;
 	
-	private Disciplina disciplina = new Disciplina();
+	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 	
-	public void setDisciplina(Disciplina disciplina) {
-		this.disciplina = disciplina;
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
 	}
-	public Disciplina getDisciplina() {
-		return disciplina;
+	
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
 	}
+	
+
 	
 	public Aluno() {/*Cria os dados na memoria - sendo padrão do java*/
 		// TODO Auto-generated constructor stub
@@ -126,8 +131,13 @@ public class Aluno {
 
 	/*Método que retorna a media do aluno*/
 	public double getMediaNota() {
-		return (disciplina.getNota1() + disciplina.getNota2()
-		+ disciplina.getNota3() + disciplina.getNota4() ) / 4;
+		
+		double somaNotas = 0.0;
+		
+		for(Disciplina disciplina : disciplinas) {
+			somaNotas += disciplina.getNota();
+		}
+		return somaNotas / disciplinas.size();
 	}
 	/*Método que retorna true para aprovado e false para reprovado*/
 	public boolean getAlunoAprovado() {
@@ -141,8 +151,12 @@ public class Aluno {
 	
 	public String getAlunoAprovado2() {
 		double media = this.getMediaNota();
-		if(media >= 70) {
-			return "Aluno Está Aprovado";
+		if(media >= 50) {
+			if(media >=70) {
+				return "Aluno Está Aprovado";
+			}else {
+				return "Aluno Está em Recuperação";
+			}
 		}else {
 			return "Aluno Está Reprovado";
 		}
@@ -152,7 +166,7 @@ public class Aluno {
 		return "Aluno [nome=" + nome + ", idade=" + idade + ", dataNascimento=" + dataNascimento + ", registroGeral="
 				+ registroGeral + ", numeroCpf=" + numeroCpf + ", nomeMae=" + nomeMae + ", nomePai=" + nomePai
 				+ ", dataMatricula=" + dataMatricula + ", nomeEscola=" + nomeEscola + ", serieMatriculado="
-				+ serieMatriculado + ", disciplina=" + disciplina + "]";
+				+ serieMatriculado + "]";
 	}
 
 	
