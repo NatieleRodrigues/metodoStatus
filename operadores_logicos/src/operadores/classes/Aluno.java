@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import operadores.constantes.StatusAluno;
+
 /*está é nossa classe/objeto que representa o aluno*/
 public class Aluno {
 	/*Esses são os atributos do Aluno*/
@@ -153,12 +155,12 @@ public class Aluno {
 		double media = this.getMediaNota();
 		if(media >= 50) {
 			if(media >=70) {
-				return "Aluno Está Aprovado";
+				return StatusAluno.APROVADO;
 			}else {
-				return "Aluno Está em Recuperação";
+				return StatusAluno.RECUPERACAO;
 			}
 		}else {
-			return "Aluno Está Reprovado";
+			return StatusAluno.REPROVADO;
 		}
 	}
 	@Override
